@@ -1,2 +1,2 @@
-export * from './Controller'
+export * from './controller'
 export * from './http'
