@@ -18,8 +18,6 @@ export class DbAddAccount implements AddAccount {
       ...account,
       password: hashedPassword
     })
-    return new Promise((resolve) => {
-      resolve(newAccount)
-    })
+    return newAccount
   }
 }
