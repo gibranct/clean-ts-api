@@ -3,8 +3,8 @@ import { Collection, MongoClient } from 'mongodb'
 class MongoHelper {
   client: MongoClient
 
-  async connect () {
-    this.client = await MongoClient.connect(process.env.MONGO_URL!, {
+  async connect (mongoUrl: string) {
+    this.client = await MongoClient.connect(mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
