@@ -2,16 +2,31 @@ import { HttpResponse, HttpRequest } from '../../presentation/protocols'
 import { Controller } from './../../presentation/protocols/controller'
 import { LogControllerDecorator } from './log'
 
+type SutTypes = {
+  controllerStub: Controller
+  sut: LogControllerDecorator
+}
+
+const makeSut = (): SutTypes => {
+  class ControllerStub implements Controller {
+    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+      return Promise.resolve({
+        statusCode: 200,
+        body: httpRequest
+      })
+    }
+  }
+  const stub = new ControllerStub()
+  const sut = new LogControllerDecorator(stub)
+  return {
+    controllerStub: stub,
+    sut
+  }
+}
+
 describe('LogController Decorator', () => {
   test('should call controller handle', async () => {
-    class ControllerStub implements Controller {
-      async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-        return Promise.resolve({
-          statusCode: 200,
-          body: httpRequest
-        })
-      }
-    }
+    const { sut, controllerStub } = makeSut()
     const httpRequest = {
       body: {
         email: 'any_email@mail.com',
@@ -20,9 +35,7 @@ describe('LogController Decorator', () => {
         passwordConfirmation: 'any_password'
       }
     }
-    const stub = new ControllerStub()
-    const sut = new LogControllerDecorator(stub)
-    const handleSpy = jest.spyOn(stub, 'handle')
+    const handleSpy = jest.spyOn(controllerStub, 'handle')
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
   })
