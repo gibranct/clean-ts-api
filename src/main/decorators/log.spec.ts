@@ -7,7 +7,7 @@ type SutTypes = {
   sut: LogControllerDecorator
 }
 
-const makeSut = (): SutTypes => {
+const makeControllerStub = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
       return Promise.resolve({
@@ -16,7 +16,11 @@ const makeSut = (): SutTypes => {
       })
     }
   }
-  const stub = new ControllerStub()
+  return new ControllerStub()
+}
+
+const makeSut = (): SutTypes => {
+  const stub = makeControllerStub()
   const sut = new LogControllerDecorator(stub)
   return {
     controllerStub: stub,
@@ -57,3 +61,7 @@ describe('LogController Decorator', () => {
     })
   })
 })
+
+/**
+ * criar interface log error repository
+ */
