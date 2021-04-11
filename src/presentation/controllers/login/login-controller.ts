@@ -3,7 +3,7 @@ import { InvalidParamError } from './../../errors/invalid-param-error'
 import { EmailValidator } from './../../protocols/email-validator'
 import { HttpRequest, HttpResponse } from '../../protocols'
 import { MissingParamError } from './../../errors/missing-param-error'
-import { badRequest, serverError } from './../../helpers/http-helper'
+import { badRequest, serverError, unauthorized } from './../../helpers/http-helper'
 import { Controller } from './../../protocols/controller'
 
 export class LoginController implements Controller {
@@ -31,8 +31,12 @@ export class LoginController implements Controller {
         return badRequest(new InvalidParamError('email'))
       }
 
-      await this.authentication.auth(email, password)
+      const accessToken = await this.authentication.auth(email, password)
+      if (!accessToken) {
+        return unauthorized()
+      }
     } catch (error) {
+      console.log(error)
       return serverError(error)
     }
   }
