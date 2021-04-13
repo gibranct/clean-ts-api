@@ -1,3 +1,4 @@
+import { makeSignUpValidation } from './signup-validation'
 import { LogMongoRepostiory } from './../../infra/db/mongodb/log-repository/log'
 import { LogControllerDecorator } from './../decorators/log'
 import { BcryptAdapter } from './../../infra/criptography/bcrypt-adapter'
@@ -13,7 +14,7 @@ export const makeSignUpController = (): Controller => {
   const bcryptAdapter = new BcryptAdapter(salt)
   const accountMongoRepository = new AccountMongoRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository)
-  const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount)
+  const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount, makeSignUpValidation())
   const logMongoRepo = new LogMongoRepostiory()
   return new LogControllerDecorator(signUpController, logMongoRepo)
 }
