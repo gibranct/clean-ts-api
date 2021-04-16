@@ -2,7 +2,7 @@ import { AddAccount, AddAccountModel, Validation } from './signup-protocols'
 import { MissingParamError, ServerError } from '../../errors'
 import { SignUpController } from './sign-up-controller'
 import { AccountModel } from '../../../domain/models/account'
-import { ok, serverError, badRequest } from '../../helpers/http-helper'
+import { ok, serverError, badRequest } from '../../helpers/http/http-helper'
 
 const makeHttpRequest = () => ({
   body: {
