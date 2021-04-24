@@ -1,11 +1,11 @@
 import { Collection } from 'mongodb'
 
 import { mongoHelper } from '../helpers/mongo-helper'
-import { LogMongoRepostiory } from './log'
+import { LogMongoRepository } from './log'
 import { LogErrorRepository } from '../../../../data/protocols/db/log-error-repository'
 
 const makeSut = (): LogErrorRepository => {
-  return new LogMongoRepostiory()
+  return new LogMongoRepository()
 }
 
 describe('Log Mongo Repository', () => {
