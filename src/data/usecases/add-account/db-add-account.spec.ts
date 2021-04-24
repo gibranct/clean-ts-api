@@ -1,8 +1,8 @@
-import { Encrypter } from './../../protocols/encrypter'
+import { Encrypter } from '../../protocols/criptography/encrypter'
 import { DbAddAccount } from './db-add-account'
 import { AccountModel } from '../../../domain/models/account'
 import { AddAccountModel } from '../../../domain/usecases/add-account'
-import { AddAccountRepository } from '../../protocols/add-account-repository'
+import { AddAccountRepository } from '../../protocols/db/add-account-repository'
 
 type SutType = {
   encrypterStub: Encrypter
