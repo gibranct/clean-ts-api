@@ -2,7 +2,7 @@ import { AuthenticationModel, Authentication } from '../../../domain/usecases/au
 import { HashComparer } from '../../protocols/cryptography/hash-comparer'
 import { LoadAccountByEmailRepository } from '../../protocols/db/load-account-by-email-repository'
 import { TokenGenerator } from '../../protocols/db/token-generator'
-import { UpdateAccessTokenRepository } from '../../protocols/db/update-access-token-repostiory'
+import { UpdateAccessTokenRepository } from '../../protocols/db/update-access-token-repository'
 import { AccountModel } from './../../../domain/models/account'
 import { DbAuthentication } from './db-authentication'
 
@@ -148,5 +148,12 @@ describe('DbAuthentication UseCase', () => {
     const updateSpy = jest.spyOn(updateAccessTokenRepoStub, 'update')
     await sut.auth(makeFakeAuthentication())
     expect(updateSpy).toHaveBeenCalledWith('any_id', 'token')
+  })
+
+  test('should throw if UpdateAccessTokenRepository throws', async () => {
+    const { sut, updateAccessTokenRepoStub } = makeSut()
+    jest.spyOn(updateAccessTokenRepoStub, 'update').mockRejectedValueOnce(new Error())
+    const promise = sut.auth(makeFakeAuthentication())
+    await expect(promise).rejects.toThrow()
   })
 })

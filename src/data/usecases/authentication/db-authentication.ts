@@ -2,7 +2,7 @@ import { TokenGenerator } from './../../protocols/db/token-generator'
 import { HashComparer } from '../../protocols/cryptography/hash-comparer'
 import { LoadAccountByEmailRepository } from '../../protocols/db/load-account-by-email-repository'
 import { Authentication, AuthenticationModel } from './../../../domain/usecases/authentication'
-import { UpdateAccessTokenRepository } from '../../protocols/db/update-access-token-repostiory'
+import { UpdateAccessTokenRepository } from '../../protocols/db/update-access-token-repository'
 
 export class DbAuthentication implements Authentication {
   private readonly loadAccountByEmailRepo: LoadAccountByEmailRepository
