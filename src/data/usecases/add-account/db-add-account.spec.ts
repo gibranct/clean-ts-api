@@ -1,4 +1,4 @@
-import { Encrypter } from '../../protocols/criptography/encrypter'
+import { Encrypter } from '../../protocols/cryptography/encrypter'
 import { DbAddAccount } from './db-add-account'
 import { AccountModel } from '../../../domain/models/account'
 import { AddAccountModel } from '../../../domain/usecases/add-account'
