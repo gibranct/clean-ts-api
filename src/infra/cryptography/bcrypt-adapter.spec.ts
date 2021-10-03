@@ -32,4 +32,11 @@ describe('', () => {
     const promise = sut.hash('any_value')
     await expect(promise).rejects.toThrow()
   })
+
+  test('should call compare with correct values', async () => {
+    const sut = makeSut()
+    const hashSpy = jest.spyOn(bcrypt, 'compare')
+    await sut.compare('any_value', 'hashed_value')
+    expect(hashSpy).toHaveBeenCalledWith('any_value', 'hashed_value')
+  })
 })
