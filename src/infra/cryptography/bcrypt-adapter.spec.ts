@@ -39,4 +39,31 @@ describe('', () => {
     await sut.compare('any_value', 'hashed_value')
     expect(hashSpy).toHaveBeenCalledWith('any_value', 'hashed_value')
   })
+
+  test('should return true on success', async () => {
+    const sut = makeSut()
+    jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => {
+      return Promise.resolve(true)
+    })
+    const isValid = await sut.compare('any_value', 'hashed_value')
+    expect(isValid).toBe(true)
+  })
+
+  test('should return false on fail', async () => {
+    const sut = makeSut()
+    jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => {
+      return Promise.resolve(false)
+    })
+    const isValid = await sut.compare('any_value', 'hashed_value')
+    expect(isValid).toBe(false)
+  })
+
+  test('should throw if bcrypt throws', async () => {
+    const sut = makeSut()
+    jest.spyOn(bcrypt, 'compare').mockImplementationOnce(async () => {
+      return Promise.reject(new Error())
+    })
+    const promise = sut.compare('any_value', 'hashed_value')
+    await expect(promise).rejects.toThrow()
+  })
 })
