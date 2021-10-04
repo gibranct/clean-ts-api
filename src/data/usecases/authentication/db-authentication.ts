@@ -8,16 +8,11 @@ import {
 } from './db-authentication-protocols'
 
 export class DbAuthentication implements Authentication {
-  private readonly loadAccountByEmailRepo: LoadAccountByEmailRepository
-  private readonly hashComparer: HashComparer
-  private readonly tokenGenerator: Encrypter
-  private readonly updateAccessTokenRepo: UpdateAccessTokenRepository
-
   constructor (
-    loadAccountByEmailRepo: LoadAccountByEmailRepository,
-    hashComparer: HashComparer,
-    tokenGenerator: Encrypter,
-    updateAccessTokenRepo: UpdateAccessTokenRepository
+    private readonly loadAccountByEmailRepo: LoadAccountByEmailRepository,
+    private readonly hashComparer: HashComparer,
+    private readonly tokenGenerator: Encrypter,
+    private readonly updateAccessTokenRepo: UpdateAccessTokenRepository
   ) {
     this.loadAccountByEmailRepo = loadAccountByEmailRepo
     this.hashComparer = hashComparer
