@@ -1,5 +1,5 @@
 import { Validation } from '../../../presentation/protocols/validation'
-import { makeLoginValidation } from './login-validation'
+import { makeLoginValidation } from './login-validation-factory'
 import { EmailValidator } from '../../../presentation/protocols'
 import { EmailValidation, RequiredFieldValidation, ValidationComposite } from '../../../presentation/helpers/validators'
 

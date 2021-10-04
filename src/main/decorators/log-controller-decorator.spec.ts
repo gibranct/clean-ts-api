@@ -1,8 +1,8 @@
 import { serverError } from '../../presentation/helpers/http/http-helper'
 import { HttpResponse, HttpRequest } from '../../presentation/protocols'
 import { Controller } from './../../presentation/protocols/controller'
-import { LogControllerDecorator } from './log'
-import { LogErrorRepository } from '../../data/protocols/db/log-error-repository'
+import { LogControllerDecorator } from './log-controller-decorator'
+import { LogErrorRepository } from '../../data/protocols/db/log/log-error-repository'
 
 const makeHttpRequest = () => ({
   body: {
