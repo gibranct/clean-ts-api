@@ -2,7 +2,7 @@ import { Hasher } from '../../protocols/cryptography/hasher'
 import { DbAddAccount } from './db-add-account'
 import { AccountModel } from '../../../domain/models/account'
 import { AddAccountModel } from '../../../domain/usecases/add-account'
-import { AddAccountRepository } from '../../protocols/db/add-account-repository'
+import { AddAccountRepository } from '../../protocols/db/account/add-account-repository'
 
 type SutType = {
   encrypterStub: Hasher
