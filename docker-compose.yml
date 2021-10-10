@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  mongo:
+    image: mongo:3
+    restart: always
+    container_name: mongo-container
+    networks:
+      - clean-api
+
+  clean-node-api:
+    build:
+      context: .
+    container_name: clean-node-api
+    networks:
+      - clean-api
+    ports:
+      - "5000:5000"
+    environment:
+     - PORT=5000
+     - MONGO_URL=mongodb://mongo-container:27017/clean-node-api
+
+
+networks:
+  clean-api:
+    driver: bridge
