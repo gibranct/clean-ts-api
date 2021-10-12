@@ -2,7 +2,8 @@ import { AddAccount, AddAccountModel, Authentication, AuthenticationModel, HttpR
 import { MissingParamError, ServerError } from '../../errors'
 import { SignUpController } from './sign-up-controller'
 import { AccountModel } from '../../../domain/models/account'
-import { ok, serverError, badRequest } from '../../helpers/http/http-helper'
+import { ok, serverError, badRequest, forbidden } from '../../helpers/http/http-helper'
+import { EmailInUseError } from '../../errors/email-in-use-error'
 
 const makeHttpRequest = () => ({
   body: {
@@ -40,7 +41,7 @@ const makeAuthentication = (): Authentication => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AddAccountModel): Promise<AccountModel | null> {
       const newAccount = makeFakeAccount()
 
       return new Promise((resolve) => resolve(newAccount))
@@ -106,6 +107,15 @@ describe('SingUp Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle(makeHttpRequest())
     expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
+  })
+
+  test('should return 403 if AddAccount returns null', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
+      return new Promise((resolve) => resolve(null))
+    })
+    const httpResponse = await sut.handle(makeHttpRequest())
+    expect(httpResponse).toEqual(forbidden(new EmailInUseError()))
   })
 
   test('should call Validation with correct values', async () => {
