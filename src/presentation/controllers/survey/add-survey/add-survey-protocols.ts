@@ -1,0 +1,5 @@
+export * from '../../../../validation/protocols'
+export * from '../../../protocols/controller'
+export * from '../../../protocols/http'
+export * from '../../../../domain/usecases/add-survey'
+export * from '../../../../domain/models/survey'
