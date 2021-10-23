@@ -19,6 +19,7 @@ export class AuthMiddleware implements Middleware {
           return ok({ accountId: account.id })
         }
       }
+      console.log('==================== ===========================')
       return forbidden(error)
     } catch (error) {
       return serverError(error)
