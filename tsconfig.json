@@ -6,7 +6,7 @@
     "esModuleInterop": true,
     "allowJs": true,
     "strictNullChecks": true,
-    "sourceMap": false,
+    "sourceMap": true,
     "rootDir": "src",
     "baseUrl": ".",
     "paths": {
