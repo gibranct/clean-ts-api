@@ -57,6 +57,12 @@ describe('DbLoadSurveys Usecase', () => {
     expect(looadSurveysSpy).toHaveBeenCalled()
   })
 
+  test('should return a list of surveys on success', async () => {
+    const { sut } = makeSut()
+    const response = await sut.load()
+    expect(response).toEqual(makeFakeSurveysData())
+  })
+
   test('should throw if DbLoadSurveysRepository throws', async () => {
     const { sut, loadSurveysRepositoryStub } = makeSut()
     jest.spyOn(loadSurveysRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
