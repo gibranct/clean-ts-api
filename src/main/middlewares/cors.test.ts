@@ -1,6 +1,6 @@
 import request from 'supertest'
 
-import app from '../config/app'
+import app from '@/main/config/app'
 
 describe('Middleware Cors', () => {
   test('should parse body as json', async () => {

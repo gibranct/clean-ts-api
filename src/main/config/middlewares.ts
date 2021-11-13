@@ -1,6 +1,6 @@
 import { Express } from 'express'
 
-import { bodyParser, cors } from '../middlewares'
+import { bodyParser, cors } from '@/main/middlewares'
 import setUpRoutes from './routes'
 
 export default (app: Express) => {

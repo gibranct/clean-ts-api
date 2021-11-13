@@ -1,9 +1,9 @@
 import { AddAccount, AddAccountModel, Authentication, AuthenticationModel, HttpRequest, Validation } from './signup-protocols'
-import { MissingParamError, ServerError } from '../../errors'
+import { MissingParamError, ServerError } from '@/presentation/errors'
 import { SignUpController } from './sign-up-controller'
-import { AccountModel } from '../../../domain/models/account'
-import { ok, serverError, badRequest, forbidden } from '../../helpers/http/http-helper'
-import { EmailInUseError } from '../../errors/email-in-use-error'
+import { AccountModel } from '@/domain/models/account'
+import { ok, serverError, badRequest, forbidden } from '@/presentation/helpers/http/http-helper'
+import { EmailInUseError } from '@/presentation/errors/email-in-use-error'
 
 const makeHttpRequest = () => ({
   body: {
