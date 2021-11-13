@@ -41,4 +41,18 @@ describe('Survey Mongo Repository', () => {
     expect(survey!.answers[0].answer).toBe('any_anwser')
     expect(survey!.answers[0].image).toBe('any_image')
   })
+
+  test('should load all surveys on success', async () => {
+    await surveyCollection.insertMany([{
+      question: 'any_question',
+      answers: [{
+        answer: 'any_anwser',
+        image: 'any_image'
+      }],
+      date: new Date()
+    }])
+    const sut = makeSut()
+    const surveys = await sut.loadAll()
+    expect(surveys.length).toBe(1)
+  })
 })
