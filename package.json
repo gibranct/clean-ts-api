@@ -37,7 +37,7 @@
     "debug": "nodemon --inspect src/main/server.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "dev": "nodemon src/main/server.ts",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
     "test:integration": "yarn test --watch -c jest-integration-config.js",
     "test:staged": "yarn test --findRelatedTests",
