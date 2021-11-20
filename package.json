@@ -2,7 +2,7 @@
   "name": "clean-node-api",
   "version": "1.4.0",
   "main": "index.js",
-  "author": "gibran tavares <mac01gibran@gmail.com>",
+  "author": "gibran tavares",
   "license": "MIT",
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.2.3",
@@ -36,7 +36,6 @@
     "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify",
     "start": "yarn dev --exit-child src/main/server.ts",
     "debug": "yarn dev --inspect --exit-child src/main/server.ts",
-    "build": "rimraf dist && tsc -p tsconfig-build.json",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
     "test:integration": "yarn test --watch -c jest-integration-config.js",
@@ -54,8 +53,5 @@
   },
   "engines": {
     "node": "14.x"
-  },
-  "_moduleAliases": {
-    "@": "dist"
   }
 }
