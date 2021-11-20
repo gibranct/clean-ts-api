@@ -1,6 +1,6 @@
 export const loginPath = {
   post: {
-    tags: ['login'],
+    tags: ['Login'],
     summary: 'API para autenticar o usuário',
     requestBody: {
       description: 'Dados do usuário',
@@ -22,6 +22,18 @@ export const loginPath = {
             }
           }
         }
+      },
+      400: {
+        $ref: '#/components/badRequest'
+      },
+      401: {
+        $ref: '#/components/unauthorized'
+      },
+      404: {
+        $ref: '#/components/notFound'
+      },
+      500: {
+        $ref: '#/components/serverError'
       }
     }
   }
