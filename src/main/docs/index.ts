@@ -8,6 +8,9 @@ import { accountSchema } from '@/main/docs/schemas/account-schema'
 import { loginParamsSchema } from '@/main/docs/schemas/login-params-schema'
 import { loginPath, signupPath } from './login-path'
 import { signupParamsSchema } from '@/main/docs/schemas/signup-params-schema'
+import { addSurveyParamsSchema } from '@/main/docs/schemas/add-survey-params-schema'
+import { surveyPath } from '@/main/docs/survey-path'
+import { loadSurveysParamsSchema } from '@/main/docs/schemas/load-surveys-params-schema'
 
 export const swaggerConfig = {
   openapi: '3.0.0',
@@ -20,24 +23,36 @@ export const swaggerConfig = {
     url: '/api'
   }],
   tags: [{
-    name: 'Login',
-    description: 'API para autenticar o usuário'
+    name: 'Login'
+  },
+  {
+    name: 'Survey'
   }],
   paths: {
     '/login': loginPath,
-    '/signup': signupPath
+    '/signup': signupPath,
+    '/surveys': surveyPath
   },
   schemas: {
     account: accountSchema,
     loginParams: loginParamsSchema,
     error: errorSchema,
-    signup: signupParamsSchema
+    signup: signupParamsSchema,
+    addSignupParams: addSurveyParamsSchema,
+    loadSurveys: loadSurveysParamsSchema
   },
   components: {
     badRequest,
     serverError,
     unauthorized,
     notFound,
-    forbidden
+    forbidden,
+    securitySchemes: {
+      ApiKeyAuth: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'x-access-token'
+      }
+    }
   }
 }
